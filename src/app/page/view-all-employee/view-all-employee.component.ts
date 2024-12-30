@@ -8,13 +8,15 @@ import { NavComponent } from '../../comman/nav/nav.component';
 @Component({
   selector: 'app-view-all-employee',
   standalone: true,
-  imports: [HttpClientModule, FormsModule, CommonModule,NavComponent],
+  imports: [HttpClientModule, FormsModule, CommonModule, NavComponent],
   templateUrl: './view-all-employee.component.html',
   styleUrl: './view-all-employee.component.css'
 })
 export class ViewAllEmployeeComponent {
 
   public employeeList: any;
+
+  
 
   constructor(private http: HttpClient) {
     this.loadAllEmployeeTable();
@@ -28,7 +30,7 @@ export class ViewAllEmployeeComponent {
     })
   }
 
-  deleteEmployee(employee:any){
+  deleteEmployee(employee: any) {
 
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -48,7 +50,7 @@ export class ViewAllEmployeeComponent {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.http.delete(`http://localhost:8080/emp-controller/delete-emp/${employee.id}`,{responseType:'text'}).subscribe(res => {
+        this.http.delete(`http://localhost:8080/emp-controller/delete-emp/${employee.id}`, { responseType: 'text' }).subscribe(res => {
           this.loadAllEmployeeTable();
           swalWithBootstrapButtons.fire({
             title: "Deleted!",
@@ -69,6 +71,21 @@ export class ViewAllEmployeeComponent {
         });
       }
     });
-    
+
+  }
+
+  public selectedEmployee: any= {
+    "id": null,
+    "firstName": null,
+    "lastName": null,
+    "email": null,
+    "department": null,
+    "role": null
+  }
+
+  updateEmployee(employee: any) {
+      this.selectedEmployee=employee;
+      console.log(employee);
+      
   }
 }
