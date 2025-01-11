@@ -85,7 +85,18 @@ export class ViewAllEmployeeComponent {
 
   updateEmployee(employee: any) {
       this.selectedEmployee=employee;
-      console.log(employee);
+
+      if(employee != null){
+        this.selectedEmployee=employee;
+      }
       
+      console.log(employee);   
+  }
+
+  saveUpdateEmployee(){
+    this.http.post("http://localhost:8080/emp-controller/update-emp",this.selectedEmployee).subscribe(res =>{
+      console.log("update");
+      
+    })
   }
 }
