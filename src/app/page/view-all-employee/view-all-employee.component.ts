@@ -22,6 +22,10 @@ export class ViewAllEmployeeComponent {
     this.loadAllEmployeeTable();
   }
 
+  getDepartmentName(departmentList:any[]):string{
+        return departmentList.map(dptm => dptm.name).join(', ')
+  }
+
 
   loadAllEmployeeTable() {
     this.http.get("http://localhost:8080/emp-controller/get-all").subscribe(res => {
