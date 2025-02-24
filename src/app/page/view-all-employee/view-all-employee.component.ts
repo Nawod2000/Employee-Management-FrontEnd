@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -36,6 +36,12 @@ export class ViewAllEmployeeComponent {
 
   deleteEmployee(employee: any) {
 
+    const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic c2FtYW46MTIzNA=='
+    })
+    
+
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -54,7 +60,7 @@ export class ViewAllEmployeeComponent {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.http.delete(`http://localhost:8080/emp-controller/delete-emp/${employee.id}`, { responseType: 'text' }).subscribe(res => {
+        this.http.delete(`http://localhost:8080/emp-controller/delete-emp/${employee.id}`, { responseType: 'text',headers }).subscribe(res => {
           this.loadAllEmployeeTable();
           swalWithBootstrapButtons.fire({
             title: "Deleted!",
