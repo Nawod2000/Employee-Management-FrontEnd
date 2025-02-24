@@ -6,6 +6,12 @@
 
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1"></span>
+    <input type="text" class="form-control" placeholder="id" [(ngModel)]="employeeObj.id"
+      aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"></span>
     <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="employeeObj.firstName"
       aria-label="Username" aria-describedby="basic-addon1">
   </div>
@@ -23,7 +29,7 @@
   </div>
 
   <div class="input-group mb-3">
-    <select class="form-select" aria-label="Default select example" [(ngModel)]="employeeObj.department">
+    <select class="form-select" aria-label="Default select example" [(ngModel)]="employeeObj.departmentList[0].name">
       <option value="">Select the Department </option>
       <option value="No Department">No Department</option>
       <option value="Product Development">Product Development</option>
@@ -40,7 +46,7 @@
   </div>
 
   <div class="input-group mb-3">
-    <select class="form-select" aria-label="Default select example" [(ngModel)]="employeeObj.role">
+    <select class="form-select" aria-label="Default select example" [(ngModel)]="employeeObj.role.name">
       <option value="">Select the Role</option>
       <option value="No Role">No Role</option>
       <option value="Software Developer/Engineer">Software Developer/Engineer</option>

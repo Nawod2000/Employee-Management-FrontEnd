@@ -94,9 +94,23 @@ export class ViewAllEmployeeComponent {
   }
 
   saveUpdateEmployee(){
-    this.http.post("http://localhost:8080/emp-controller/update-emp",this.selectedEmployee).subscribe(res =>{
-      console.log("update");
-      
-    })
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("Saved!", "", "success");
+        this.http.post("http://localhost:8080/emp-controller/update-emp",this.selectedEmployee).subscribe(res =>{
+          console.log("update"); 
+        })
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+    
   }
 }
